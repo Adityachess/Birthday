@@ -13,29 +13,29 @@ function checkPassword() {
         document.getElementById("passwordSection").classList.add("hidden");
         document.getElementById("startBtn").classList.remove("hidden");
     } else {
-        wrongText.innerHTML = "😢 Wrong password… Only Panda Queen allowed 🐼👑";
+        wrongText.innerHTML = "😢 Wrong password… Try again! 💕";
     }
 }
 
 const questions = [
     {
-        question: "When did our story begin? ❤️",
-        options: ["22 July 2024", "23 July 2024 ❤️", "24 July 2024", "25 July 2024"],
+        question: "When did our story begin?",
+        options: ["22 July 2024", "23 July 2024", "24 July 2024", "25 July 2024"],
         answer: 1
     },
     {
-        question: "Who is more dramatic? 😄",
-        options: ["You", "Me", "Both of us ❤️"],
+        question: "Who is more dramatic?",
+        options: ["You", "Me", "Both of us"],
         answer: 2
     },
     {
         question: "What makes you special to me?",
-        options: ["Your smile", "Your heart", "Everything about you ❤️"],
+        options: ["Your smile", "Your heart", "Everything about you"],
         answer: 2
     },
     {
         question: "What are you to me?",
-        options: ["Girlfriend", "Best Friend", "My Future ❤️"],
+        options: ["Girlfriend", "Best Friend", "My Future"],
         answer: 2
     }
 ];
@@ -85,13 +85,14 @@ function checkAnswer(selected) {
             finishQuiz();
         }
     } else {
-        wrongMessage.innerText = "😢 Aww nooo Panda Queen 🐼👑 Try again cutie 💕";
-    }
+        wrongMessage.innerText = "😢 Oops, try again cutie! 💕";        const correctIndex = questions[currentQuestion].answer;
+        const buttons = optionsEl.querySelectorAll('button');
+        buttons[correctIndex].classList.add('highlight-correct');    }
 }
 
 function finishQuiz() {
     quizDiv.classList.add("hidden");
-    memorySection.classList.remove("hidden");
+    document.getElementById("birthdayCard").classList.remove("hidden");
 
     confetti({
         particleCount: 200,
@@ -106,7 +107,6 @@ function typeMessage() {
     const message =
         "Happiest Birthday Ankita 👑💖✨\n\n" +
         "23 July 2024 — the day my world became pinker 🌸\n\n" +
-        "You are my Panda Queen 🐼👑\n" +
         "My soft place.\n" +
         "My happy chaos.\n" +
         "My forever girl.\n\n" +
@@ -117,7 +117,7 @@ function typeMessage() {
     let i = 0;
     function typing() {
         if (i < message.length) {
-            finalMessage.innerHTML += message.charAt(i);
+            document.getElementById("birthdayMessage").innerHTML += message.charAt(i);
             i++;
             setTimeout(typing, 50);
         }
@@ -137,3 +137,47 @@ document.addEventListener("mousemove", function(e) {
     document.body.appendChild(sparkle);
     setTimeout(() => sparkle.remove(), 500);
 });
+
+const continueBtn = document.getElementById("continueBtn");
+
+continueBtn.onclick = () => {
+
+    document.getElementById("birthdayCard").classList.add("hidden");
+    memorySection.classList.remove("hidden");
+
+};
+
+// Slideshow functionality
+let slideIndex = 1;
+
+function changeSlide(n) {
+    showSlide(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlide(slideIndex = n);
+}
+
+function showSlide(n) {
+    const slides = document.getElementsByClassName("slide");
+    const dots = document.getElementsByClassName("dot");
+    
+    if (n > slides.length) {
+        slideIndex = 1;
+    }
+    if (n < 1) {
+        slideIndex = slides.length;
+    }
+    
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("fade");
+    }
+    for (let i = 0; i < dots.length; i++) {
+        dots[i].classList.remove("active");
+    }
+    
+    slides[slideIndex - 1].classList.add("fade");
+    dots[slideIndex - 1].classList.add("active");
+}
+
+showSlide(slideIndex);
