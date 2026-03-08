@@ -367,11 +367,11 @@ slideshowBtn.addEventListener('click', function() {
     photoCollage.classList.add('hidden');
     isSlideshowMode = true;
 
-    // Hide complete button until all slides are viewed
+    // Hide complete button until last slide is viewed
     showGiftBtn.style.display = "none";
     showGiftBtn.classList.remove("animate-in");
 
-    // Check if all slides have been viewed already
+    // Check if last slide has been viewed already
     checkAllSlidesViewed();
 });
 
@@ -405,6 +405,10 @@ showGiftBtn.addEventListener('click', function() {
 
 // Initialize slideshow mode
 isSlideshowMode = true;
+
+// Slideshow variables
+let slideIndex = 1;
+let viewedSlides = new Set();
 
 function changeSlide(n) {
     showSlide(slideIndex += n);
@@ -441,13 +445,21 @@ function showSlide(n) {
         checkAllSlidesViewed();
     }
 
+    // If we're on the last slide in slideshow mode, show gift button immediately
+    if (isSlideshowMode && slideIndex === 15) {
+        setTimeout(() => {
+            document.getElementById("showGiftBtn").style.display = "inline-block";
+            document.getElementById("showGiftBtn").classList.add("animate-in");
+        }, 2000); // Show after 2 seconds on the last slide
+    }
+}
+
 function checkAllSlidesViewed() {
-    if (viewedSlides.size === 15 && isSlideshowMode) {
-        // All slides viewed, show the complete button
+    if (viewedSlides.has(15) && isSlideshowMode) {  // Show if last slide has been viewed
+        // Last slide viewed, show the complete button
         document.getElementById("showGiftBtn").style.display = "inline-block";
         document.getElementById("showGiftBtn").classList.add("animate-in");
     }
-}
 }
 
 showSlide(slideIndex);
