@@ -1,7 +1,27 @@
 setTimeout(() => {
     document.getElementById("loadingScreen").style.display = "none";
     document.getElementById("mainContent").classList.remove("hidden");
+    createFloatingHearts(); // Add floating hearts
 }, 3000);
+
+// Create floating hearts animation
+function createFloatingHearts() {
+    const heartsContainer = document.getElementById('heartsContainer');
+    const heartEmojis = ['💖', '💕', '💗', '💓', '💘', '💝'];
+
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDelay = Math.random() * 6 + 's';
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }, 800);
+}
 
 const correctPassword = "ankita";
 
@@ -139,16 +159,252 @@ document.addEventListener("mousemove", function(e) {
 });
 
 const continueBtn = document.getElementById("continueBtn");
+const loveLetterBtn = document.getElementById("loveLetterBtn");
+const backToMemoriesBtn = document.getElementById("backToMemories");
 
 continueBtn.onclick = () => {
-
     document.getElementById("birthdayCard").classList.add("hidden");
     memorySection.classList.remove("hidden");
-
 };
 
-// Slideshow functionality
-let slideIndex = 1;
+loveLetterBtn.onclick = () => {
+    document.getElementById("birthdayCard").classList.add("hidden");
+    document.getElementById("loveLetter").classList.remove("hidden");
+};
+
+backToMemoriesBtn.onclick = () => {
+    document.getElementById("loveLetter").classList.add("hidden");
+    memorySection.classList.remove("hidden");
+};
+
+// Virtual Gift functionality
+const giftBtn = document.getElementById("giftBtn");
+const giftReveal = document.getElementById("giftReveal");
+
+giftBtn.onclick = () => {
+    giftBtn.classList.add("hidden");
+    giftReveal.classList.remove("hidden");
+
+    // Enhanced confetti for gift reveal
+    confetti({
+        particleCount: 200,
+        spread: 120,
+        origin: { y: 0.8 },
+        colors: ['#ff4e50', '#feca57', '#ff9ff3', '#54a0ff'],
+        shapes: ['circle', 'square']
+    });
+
+    // Add a romantic message animation
+    setTimeout(() => {
+        const giftTitle = document.querySelector("#giftReveal h3");
+        giftTitle.style.animation = "textGlow 2s infinite alternate";
+    }, 500);
+};
+
+// Final surprise functionality
+const finalSurpriseBtn = document.getElementById("finalSurpriseBtn");
+const finalSurprise = document.getElementById("finalSurprise");
+
+finalSurpriseBtn.onclick = () => {
+    giftReveal.classList.add("hidden");
+    finalSurprise.classList.remove("hidden");
+
+    // Extra special confetti for the final surprise
+    confetti({
+        particleCount: 200,
+        spread: 160,
+        origin: { y: 0.5, x: 0.5 },
+        colors: ['#ff4e50', '#feca57', '#ff9ff3', '#54a0ff']
+    });
+
+    // Create a special heart rain effect
+    setTimeout(() => {
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => {
+                confetti({
+                    particleCount: 1,
+                    startVelocity: 0,
+                    spread: 360,
+                    origin: {
+                        x: Math.random(),
+                        y: Math.random() - 0.2
+                    },
+                    shapes: ['heart'],
+                    colors: ['#ff4e50', '#ff9ff3']
+                });
+            }, i * 100);
+        }
+    }, 1000);
+
+    // Type out the final message
+    typeFinalMessage();
+}
+
+function typeFinalMessage() {
+    const finalText = document.querySelector("#finalSurprise .surprise-content p:nth-child(3)");
+    const text = "Happy Birthday to my Queen, my love, my everything! 🎂👑💖";
+    let i = 0;
+
+    finalText.textContent = "";
+
+    function typeWriter() {
+        if (i < text.length) {
+            finalText.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+        }
+    }
+    typeWriter();
+}
+
+// Create floating sparkles
+function createSparkles() {
+    const sparklesContainer = document.getElementById('sparklesContainer');
+    const sparkleEmojis = ['✨', '⭐', '🌟', '💫'];
+
+    setInterval(() => {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.innerHTML = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.animationDelay = Math.random() * 8 + 's';
+        sparkle.style.fontSize = (Math.random() * 10 + 10) + 'px';
+        sparklesContainer.appendChild(sparkle);
+
+        setTimeout(() => {
+            sparkle.remove();
+        }, 8000);
+    }, 2000);
+}
+
+// Initialize sparkles when page loads
+createSparkles();
+
+// Custom Heart Cursor
+document.addEventListener('DOMContentLoaded', function() {
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor-heart';
+    cursor.innerHTML = '💖';
+    document.body.appendChild(cursor);
+
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function updateCursor() {
+        cursorX += (mouseX - cursorX) * 0.1;
+        cursorY += (mouseY - cursorY) * 0.1;
+
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+
+        requestAnimationFrame(updateCursor);
+    }
+    updateCursor();
+
+    // Create heart trail effect
+    let trailCount = 0;
+    document.addEventListener('mousemove', function(e) {
+        if (trailCount % 5 === 0) { // Create trail every 5th move
+            const trail = document.createElement('div');
+            trail.className = 'cursor-heart trail';
+            trail.innerHTML = '💕';
+            trail.style.left = e.clientX + 'px';
+            trail.style.top = e.clientY + 'px';
+            document.body.appendChild(trail);
+
+            setTimeout(() => {
+                trail.remove();
+            }, 1000);
+        }
+        trailCount++;
+    });
+});
+
+// Music Control
+const musicBtn = document.getElementById("musicBtn");
+const musicStatus = document.getElementById("musicStatus");
+const bgMusic = document.getElementById("bgMusic");
+let isPlaying = false;
+
+musicBtn.addEventListener('click', function() {
+    if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.textContent = '🎵 Play Music 🎵';
+        musicBtn.classList.remove('playing');
+        musicStatus.textContent = 'Music paused 💔';
+    } else {
+        bgMusic.play().then(() => {
+            musicBtn.textContent = '⏸️ Pause Music ⏸️';
+            musicBtn.classList.add('playing');
+            musicStatus.textContent = 'Playing romantic music 💕';
+            musicStatus.classList.add('show');
+            setTimeout(() => musicStatus.classList.remove('show'), 3000);
+        }).catch(e => {
+            musicStatus.textContent = 'Click anywhere first to enable music 🎵';
+            musicStatus.classList.add('show');
+            setTimeout(() => musicStatus.classList.remove('show'), 5000);
+        });
+    }
+    isPlaying = !isPlaying;
+});
+
+// View switching functionality
+const slideshowBtn = document.getElementById("slideshowBtn");
+const collageBtn = document.getElementById("collageBtn");
+const slideshowContainer = document.querySelector(".slideshow-container");
+const photoCollage = document.getElementById("photoCollage");
+const showGiftBtn = document.getElementById("showGiftBtn");
+
+slideshowBtn.addEventListener('click', function() {
+    slideshowBtn.classList.add('active');
+    collageBtn.classList.remove('active');
+    slideshowContainer.classList.remove('hidden');
+    photoCollage.classList.add('hidden');
+    isSlideshowMode = true;
+
+    // Hide complete button until all slides are viewed
+    showGiftBtn.style.display = "none";
+    showGiftBtn.classList.remove("animate-in");
+
+    // Check if all slides have been viewed already
+    checkAllSlidesViewed();
+});
+
+collageBtn.addEventListener('click', function() {
+    collageBtn.classList.add('active');
+    slideshowBtn.classList.remove('active');
+    slideshowContainer.classList.add('hidden');
+    photoCollage.classList.remove('hidden');
+    isSlideshowMode = false;
+
+    // In collage mode, show complete button immediately since all photos are visible
+    showGiftBtn.style.display = "inline-block";
+    showGiftBtn.classList.add("animate-in");
+});
+
+// Memory completion and gift reveal
+const giftSection = document.getElementById("giftSection");
+
+showGiftBtn.addEventListener('click', function() {
+    showGiftBtn.style.display = 'none';
+    giftSection.classList.remove('hidden');
+
+    // Trigger celebratory confetti
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ff9ff3', '#54a0ff', '#feca57']
+    });
+});
+
+// Initialize slideshow mode
+isSlideshowMode = true;
 
 function changeSlide(n) {
     showSlide(slideIndex += n);
@@ -161,23 +417,37 @@ function currentSlide(n) {
 function showSlide(n) {
     const slides = document.getElementsByClassName("slide");
     const dots = document.getElementsByClassName("dot");
-    
+
     if (n > slides.length) {
         slideIndex = 1;
     }
     if (n < 1) {
         slideIndex = slides.length;
     }
-    
+
     for (let i = 0; i < slides.length; i++) {
         slides[i].classList.remove("fade");
     }
     for (let i = 0; i < dots.length; i++) {
         dots[i].classList.remove("active");
     }
-    
+
     slides[slideIndex - 1].classList.add("fade");
     dots[slideIndex - 1].classList.add("active");
+
+    // Track viewed slides only in slideshow mode
+    if (isSlideshowMode) {
+        viewedSlides.add(slideIndex);
+        checkAllSlidesViewed();
+    }
+
+function checkAllSlidesViewed() {
+    if (viewedSlides.size === 15 && isSlideshowMode) {
+        // All slides viewed, show the complete button
+        document.getElementById("showGiftBtn").style.display = "inline-block";
+        document.getElementById("showGiftBtn").classList.add("animate-in");
+    }
+}
 }
 
 showSlide(slideIndex);

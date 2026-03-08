@@ -11,6 +11,14 @@
 🦋 ✨ 🐼 👑 🦋 💖 🦋 🌸 🐼 🦋 💅 🦋 🎀 🦋 💕 🦋
 </div>
 
+<!-- Floating Hearts -->
+<div class="hearts" id="heartsContainer">
+</div>
+
+<!-- Floating Sparkles -->
+<div class="sparkles" id="sparklesContainer">
+</div>
+
 <!-- Loading Screen -->
 <div id="loadingScreen">
     <h1>Loading Love Engine for Queen Ankita 👑💖✨</h1>
@@ -39,12 +47,99 @@
         <h1>🎂 Happy Birthday Ankita 👑💖✨</h1>
         <div class="flowers">🌸 🌺 🌷 🌼 💐 🌸 🌺 🌷 🌼 💐</div>
         <div id="birthdayMessage"></div>
-        <button id="continueBtn">Continue to Our Memories 💖</button>
+        <div class="birthday-buttons">
+            <button id="loveLetterBtn">Read My Love Letter 💌</button>
+            <button id="continueBtn">Continue to Our Memories 💖</button>
+        </div>
+    </div>
+
+    <div id="loveLetter" class="hidden birthday-slide">
+        <h1>💌 A Letter Just For You 💌</h1>
+        <div class="letter-content">
+            <p>Dear Ankita,</p>
+            <p>Happy Birthday to my favorite person in the whole world! 🎂✨</p>
+            <p>From the moment I saw you I knew you were special. Your smile lights up my darkest days, and your love makes every moment magical.</p>
+            <p>Thank you for keeping up with me and handling my mood swings, you are an amazing girl, my friend and my love . I love you more than words can express. 💕</p>
+            <p>Forever yours,<br>Your Aditya 🐵💖</p>
+        </div>
+        <button id="backToMemories">Back to Memories 💖</button>
     </div>
 
     <!-- Memories -->
 <div id="memorySection" class="hidden">
     <h2 class="sparkle">Our Beautiful Memories 👑💖✨</h2>
+
+    <div class="memory-options">
+        <button id="slideshowBtn" class="mode-button active">📸 Slideshow View</button>
+        <button id="collageBtn" class="mode-button">🖼️ Photo Collage</button>
+    </div>
+
+    <!-- Photo Collage View -->
+    <div id="photoCollage" class="hidden">
+        <h2 class="sparkle">Our Photo Collage 💖✨</h2>
+        <div class="collage-grid">
+            <div class="collage-item large">
+                <img src="images/First.JPG" alt="First meet">
+                <div class="collage-caption">Our First Meet 🐼💖</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/second.jpg" alt="Restaurant date">
+                <div class="collage-caption">Rainforest 🌳🍽️</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/third.jpg" alt="Cafe date">
+                <div class="collage-caption">Bustling Brew ☕</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/fourth.PNG" alt="Bowling">
+                <div class="collage-caption">Bowling 🎳</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/fifth.JPG" alt="Momos">
+                <div class="collage-caption">Momos 🥟</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/sixth.JPG" alt="Matching outfits">
+                <div class="collage-caption">Matching ✨</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/seventh.jpg" alt="Humpyyy">
+                <div class="collage-caption">Humpyyy 💫</div>
+            </div>
+            <div class="collage-item large">
+                <img src="images/eighth.JPG" alt="Honnavar">
+                <div class="collage-caption">Backwaters 🌊</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/nine.JPG" alt="Birthday">
+                <div class="collage-caption">Birthday 🎂</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/ten.JPG" alt="Marriage">
+                <div class="collage-caption">Wedding 😊</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/eleven.JPG" alt="Traditional">
+                <div class="collage-caption">Traditional ✨</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/twelve.JPG" alt="Badlapur">
+                <div class="collage-caption">Badlapur 💕</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/thirteen.JPG" alt="Jatayu">
+                <div class="collage-caption">Jatayu 🦅</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/fourteen.JPG" alt="Beach">
+                <div class="collage-caption">Beach 🌊</div>
+            </div>
+            <div class="collage-item">
+                <img src="images/fifteen.JPG" alt="2025 night">
+                <div class="collage-caption">2025 Night 💃🕺</div>
+            </div>
+        </div>
+    </div>
 
     <div class="slideshow-container">
 
@@ -148,11 +243,58 @@
         <span class="dot" onclick="currentSlide(14)"></span>
         <span class="dot" onclick="currentSlide(15)"></span>
     </div>
+
+    <div class="memory-complete-section">
+        <button id="showGiftBtn" class="complete-button" style="display: none;">💖 I've Seen All Our Memories 💖</button>
+    </div>
+
+    <div class="virtual-gift hidden" id="giftSection">
+        <h3>💝 You've seen all our beautiful memories! 💝</h3>
+        <p>Now it's time for your special gift, my love! 🎁✨</p>
+        <button id="giftBtn" class="gift-button">🎁 Open Your Virtual Gift! 🎁</button>
+        <div id="giftReveal" class="hidden">
+            <h3>💝 Your Special Gift 💝</h3>
+            <p>Happy Birthday my Queen! Here's a promise:</p>
+            <ul>
+                <li>🌟 Unlimited cuddles and kisses</li>
+                <li>🍕 Your favorite food whenever you want</li>
+                <li>🎬 Movie nights with your choice</li>
+                <li>💕 My love forever and always</li>
+                <li>🌍 Adventures together</li>
+            </ul>
+            <p>I love you more than anything! 💖✨</p>
+            <button id="finalSurpriseBtn" class="surprise-button">🎉 One More Surprise! 🎉</button>
+        </div>
+    </div>
+
+    <!-- Final Surprise Section -->
+    <div id="finalSurprise" class="hidden birthday-slide">
+        <h1>🌟 The Ultimate Surprise 🌟</h1>
+        <div class="surprise-content">
+            <p>My dearest Ankita,</p>
+            <p>You are the most beautiful, amazing, and special person I've ever met. Every moment with you is a treasure I hold dear to my heart.</p>
+            <p>Happy Birthday to my Queen, my love, my everything! 🎂👑💖</p>
+            <div class="heart-message">
+                <span>I</span>
+                <span>💖</span>
+                <span>Y</span>
+                <span>O</span>
+                <span>U</span>
+            </div>
+            <p>Forever and always,<br>Your Aditya 🐵💕</p>
+        </div>
+    </div>
 </div>
 
 <audio id="bgMusic" loop>
     <source src="gehra_hua.mp3" type="audio/mp3">
 </audio>
+
+<!-- Music Control -->
+<div class="music-control">
+    <button id="musicBtn" class="music-button">🎵 Play Music 🎵</button>
+    <div id="musicStatus">Click to start the romantic music! 💕</div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script src="script.js"></script>
